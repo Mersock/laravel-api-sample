@@ -1,0 +1,30 @@
+version: '3'
+services:
+  web:
+    build: ./Laravel-Docker/complete
+    container_name: laravel_api_training
+    networks:
+      - default
+    restart: always
+    volumes:
+      - ./:/var/www/html
+    ports:
+    - "80:80"
+
+  mysql:
+    image: mariadb:10.3
+    container_name: laravel_api_db
+    networks:
+      - default
+    restart: always
+    environment:
+    - "MYSQL_DATABASE=laravel_api"
+    - "MYSQL_USER=root"
+    - "MYSQL_PASSWORD=root"
+    - "MYSQL_ROOT_PASSWORD=root"
+    ports:
+    - "33061:3306"
+
+networks:
+  default:
+    driver: bridge
